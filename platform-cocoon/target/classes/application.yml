@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/talentmatch?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: talentmatch
+    password: TalentMatch2024!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: validate  # NEVER let Spring modify schema in Step 1
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+
+server:
+  port: 8081
+
+# Flask bridge configuration
+flask:
+  base-url: http://127.0.0.1:5000
+  internal-secret: Elenor1967
+  connect-timeout-ms: 3000
+  read-timeout-ms: 5000
