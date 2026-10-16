@@ -1,0 +1,27 @@
+
+# Maven build output
+target/
+
+# Java compiled files
+*.class
+
+# Eclipse local workspace metadata
+.metadata/
+.settings/
+.project
+.classpath
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Local application configuration containing secrets
+src/main/resources/application.yml

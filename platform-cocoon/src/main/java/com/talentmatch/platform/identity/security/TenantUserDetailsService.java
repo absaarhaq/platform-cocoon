@@ -20,8 +20,10 @@ public class TenantUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		CurrentAuthUsernameHolder.setUsername(username);
 		PlatformUserEntity user = userRepository.findByUsername(username)
 	            .orElseThrow(() -> {
+	            	CurrentAuthUsernameHolder.clear();
 	                log.warn("Authentication failed: user '{}' not found in Spring MySQL", username);
 	                return new UsernameNotFoundException("User not found: " + username);
 	            });

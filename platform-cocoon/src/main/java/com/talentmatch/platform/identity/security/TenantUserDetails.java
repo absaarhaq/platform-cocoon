@@ -22,6 +22,7 @@ public class TenantUserDetails implements UserDetails{
     private final String systemType;
     private final String role;
     private final boolean profileCompleted;
+    private final String candidateProfileId;
     private final Collection<? extends GrantedAuthority> authorities;
     
     public TenantUserDetails(PlatformUserEntity user) {
@@ -33,6 +34,7 @@ public class TenantUserDetails implements UserDetails{
         this.systemType = user.getSystemType();
         this.role = user.getRole();
         this.profileCompleted = Boolean.TRUE.equals(user.getProfileCompleted());
+        this.candidateProfileId = user.getCandidateProfileId();
         this.authorities = List.of(
             new SimpleGrantedAuthority("ROLE_" + user.getRole().toUpperCase()),
             new SimpleGrantedAuthority("SYSTEM_" + user.getSystemType())

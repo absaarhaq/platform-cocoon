@@ -12,5 +12,6 @@ public class TenantContext {
     private final String systemType;
     private final String role;
     private final boolean profileCompleted;
+    private final String candidateProfileId; 
 
 }

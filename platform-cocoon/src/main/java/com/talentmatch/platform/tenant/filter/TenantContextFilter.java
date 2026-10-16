@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.talentmatch.platform.identity.security.CurrentAuthUsernameHolder;
 import com.talentmatch.platform.identity.security.TenantUserDetails;
 import com.talentmatch.platform.tenant.model.TenantContext;
 
@@ -43,7 +44,7 @@ public class TenantContextFilter extends OncePerRequestFilter {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			if (auth != null && auth.getPrincipal() instanceof TenantUserDetails tud) {
 				TenantContext ctx = new TenantContext(tud.getSpringUserId(), tud.getLegacySqliteUserId(),
-						tud.getTenantId(), tud.getSystemType(), tud.getRole(), tud.isProfileCompleted());
+						tud.getTenantId(), tud.getSystemType(), tud.getRole(), tud.isProfileCompleted(),tud.getCandidateProfileId());
 				CONTEXT.set(ctx);
 				log.debug("TenantContext set: tenant={} system={} legacyId={}", ctx.getTenantId(), ctx.getSystemType(),
 						ctx.getLegacySqliteUserId());
@@ -51,6 +52,7 @@ public class TenantContextFilter extends OncePerRequestFilter {
 			filterChain.doFilter(request, response);
 		} finally {
 			clear();
+			CurrentAuthUsernameHolder.clear();
 		}
 
 	}
